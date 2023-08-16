@@ -15,6 +15,10 @@ public class MapCreate : MonoBehaviour
     public GameObject[] _outWalltiles;
     public GameObject[] _enemytiles;
 
+    public int _wallMin = 5;
+    public int _wallMax = 9;
+    public int _foodMin = 1;
+    public int _foodMax = 5;
 
     void InitialiseList()
     {
@@ -46,6 +50,28 @@ public class MapCreate : MonoBehaviour
                     toInstansiate = _floorTiles[Random.Range(0, _floorTiles.Length)];
                 }
             }
+        }
+    }
+
+    Vector3 RandomPosition()
+    {
+        int randomIndex = Random.Range(0, _gridPositions.Count);
+
+        Vector3 randomPosition = _gridPositions[randomIndex];
+        _gridPositions.RemoveAt(randomIndex);
+
+        return randomPosition;
+    }
+
+    private void LayoutObjectRandom(GameObject[] tileArray, int min, int max)
+    {
+        int objectCount = Random.Range(0, max + 1);
+
+        for(int i = 0; i < objectCount; i++)
+        {
+            Vector3 randomPosition = RandomPosition();
+            GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
+            Instantiate(tileChoice, randomPosition, Quaternion.identity);
         }
     }
 }
