@@ -67,7 +67,7 @@ public class MapCreate : MonoBehaviour
 
     private void LayoutObjectRandom(GameObject[] tileArray, int min, int max)
     {
-        int objectCount = Random.Range(0, max + 1);
+        int objectCount = Random.Range(min, max + 1);
 
         for(int i = 0; i < objectCount; i++)
         {
