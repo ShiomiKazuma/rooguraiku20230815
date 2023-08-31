@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager _instance;
     MapCreate _mapCreate;
+    public static int _floor = 1;
 
     private void Awake()
     {
@@ -39,4 +40,5 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
 }
