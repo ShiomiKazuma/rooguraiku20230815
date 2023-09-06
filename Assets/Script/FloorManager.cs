@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FloorManager : MonoBehaviour
@@ -11,16 +12,13 @@ public class FloorManager : MonoBehaviour
     void Start()
     {
         floor = GameManager._floor;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         floorNum.text = floor.ToString() + "ŠK";
     }
 
     public void FloorUp()
     {
         floor++;
+        floorNum.text = floor.ToString() + "ŠK";
+        SceneManager.LoadScene(floor);
     }
 }
