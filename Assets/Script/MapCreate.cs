@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -41,9 +42,9 @@ public class MapCreate : MonoBehaviour
             {
                 GameObject toInstansiate;
                 
-                if(x == 1 || x == _colums || y == -1 || y == _rows)
+                if(x == -1 || x == _colums || y == -1 || y == _rows)
                 {
-                    toInstansiate = _outWallTiles[Random.Range(0, _wallTiles.Length)];
+                    toInstansiate = _outWallTiles[Random.Range(0, _outWallTiles.Length)];
                 }
                 else
                 {
@@ -77,13 +78,14 @@ public class MapCreate : MonoBehaviour
         }
     }
 
-    public void SetUpScean()
+    public void SetUpScean(int level)
     {
         MapSetUp();
         InitialiseList();
         LayoutObjectRandom(_wallTiles, _wallMin, _wallMax);
         LayoutObjectRandom(_foodTiles, _foodMin, _foodMax);
-
+        int enemyCount = level;
+        LayoutObjectRandom(_enemyTiles, enemyCount, enemyCount);
         Instantiate(_Exit, new Vector3(_colums - 1, _rows - 1, 0), Quaternion.identity);
     }
 }

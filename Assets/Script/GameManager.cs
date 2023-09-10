@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager _instance;
     MapCreate _mapCreate;
     public static int _floor = 1;
+    [SerializeField] int level = 3;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     public void InitGame()
     {
-        _mapCreate.SetUpScean();
+        _mapCreate.SetUpScean(level);
     }
     // Start is called before the first frame update
     void Start()
