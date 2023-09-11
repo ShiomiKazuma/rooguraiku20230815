@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager _instance;
     MapCreate _mapCreate;
     public static int _floor = 1;
-    [SerializeField] int level = 3;
+    [SerializeField] int _level = 3;
+    [SerializeField] int _maxFoodPoint = 100;
+    public int _foodPoint = default;
 
     private void Awake()
     {
@@ -28,18 +30,27 @@ public class GameManager : MonoBehaviour
 
     public void InitGame()
     {
-        _mapCreate.SetUpScean(level);
+        _mapCreate.SetUpScean(_level);
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        _foodPoint = _maxFoodPoint;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void FoodRecover(int food)
+    {
+        _foodPoint += food;
+        if(_foodPoint > _maxFoodPoint)
+        {
+            _foodPoint = _maxFoodPoint;
+        }
     }
 
 }
