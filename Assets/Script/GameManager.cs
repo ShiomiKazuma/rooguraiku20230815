@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public float turnDelay = 0.1f;
     public static GameManager _instance;
     MapCreate _mapCreate;
     public static int _floor = 1;
     [SerializeField] int _level = 3;
+    List<Enemy> _enemies;
+    bool enemiesMoving;
+
     [SerializeField] int _maxFoodPoint = 100;
-    public int _foodPoint = default;
+    public int _foodPoint = 100;
+    [HideInInspector] public bool _playersTurn = true;
 
     private void Awake()
     {
@@ -23,25 +28,14 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-
         _mapCreate = GetComponent<MapCreate>();
         InitGame();
+        _foodPoint = _maxFoodPoint;
     }
 
     public void InitGame()
     {
         _mapCreate.SetUpScean(_level);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        _foodPoint = _maxFoodPoint;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void FoodRecover(int food)
@@ -51,6 +45,11 @@ public class GameManager : MonoBehaviour
         {
             _foodPoint = _maxFoodPoint;
         }
+    }
+
+    public void GameOver()
+    {
+        enabled = false;
     }
 
 }
