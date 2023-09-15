@@ -15,6 +15,13 @@ public class PlayerStatas : MonoBehaviour
     public int _pointsPerSoda = 20;
     public float _restartLevelDelay = 1f;
 
+    //‰¹‚É‚Â‚¢‚Ä
+    public AudioClip _eatSound1;
+    public AudioClip _eatSound2;
+    public AudioClip _drinkSound1;
+    public AudioClip _drinkSound2;
+    public AudioClip _gameOverSound;
+
     Animator _animator;
     int _food;
     public Text _foodText;
@@ -58,6 +65,8 @@ public class PlayerStatas : MonoBehaviour
     {
         if(_food <= 0)
         {
+            SoundManager.instance.PlaySingle(_gameOverSound);
+            SoundManager.instance._musicSource.Stop();
             GameManager._instance.GameOver();
         }
     }
@@ -92,12 +101,14 @@ public class PlayerStatas : MonoBehaviour
         {
             _food += _pointsPerFood;
             _foodText.text = "Food: " + _food;
+            SoundManager.instance.RandomizeSfx(_eatSound1, _eatSound2);
             collision.gameObject.SetActive(false);
         }
         else if(collision.gameObject.tag == "Soda")
         {
             _food += _pointsPerSoda;
             _foodText.text = "Food: " + _food;
+            SoundManager.instance.RandomizeSfx( _drinkSound1, _drinkSound2);
             collision.gameObject.SetActive(false);
         }
     }
