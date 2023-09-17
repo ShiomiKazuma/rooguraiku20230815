@@ -13,4 +13,10 @@ public class SceanChanger : MonoBehaviour
         _panel.gameObject.SetActive(true);
         _panel.DOFade(1, 3.0f).OnComplete(() => SceneManager.LoadScene("hoge"));
     }
+
+    public void MizeSceanChange()
+    {
+        _panel.gameObject.SetActive(true);
+        _panel.DOFade(1, 3.0f).OnComplete(() => SceneManager.LoadScene("Mize"));
+    }
 }
