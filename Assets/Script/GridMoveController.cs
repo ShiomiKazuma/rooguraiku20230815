@@ -30,7 +30,7 @@ public class GridMoveController : MonoBehaviour
     /// <returns>ˆÚ“®‰Â”\‚Èê‡‚Í true, ˆÚ“®‚Å‚«‚È‚¢ê‡‚Í false</returns>
     public bool Move(int x, int y, float moveTime)
     {
-        m_isMoving = false;
+        //m_isMoving = false;
 
         // w’è‚³‚ê‚½•ûŒü‚ÉˆÚ“®‚Å‚«‚é‚©‚Ç‚¤‚©”»’è‚·‚é
         Vector2 destination = (Vector2)this.transform.position + new Vector2(x, y);

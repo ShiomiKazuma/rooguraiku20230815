@@ -18,6 +18,7 @@ public class MizeCreate : MonoBehaviour
     int _x; //â°ÇÃóvëfî‘çÜ
     int _rnd;
 
+    [SerializeField] GameObject _floorObject;
     [SerializeField] GameObject _wallObject;
     float _wallSizeY;
     int[,] field;
@@ -115,6 +116,10 @@ public class MizeCreate : MonoBehaviour
                 if (field[_x, _y] == _wall)
                 {
                     Instantiate(_wallObject, new Vector3(1.0f * _x, 1.0f * _y, 0), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(_floorObject, new Vector3(1.0f * _x, 1.0f * _y, 0), Quaternion.identity);
                 }
 
                 Debug.Log(field[_x, _y]);
