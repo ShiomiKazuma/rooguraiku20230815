@@ -61,13 +61,13 @@ public class PlayerMoveController : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.S))
             {
-                _direction = Vector2.right;
+                _direction = Vector2.down;
                 direction.transform.position = new Vector3(0, -1, 0) + this.gameObject.transform.position;
                 direction.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
             }
             else if(Input.GetKeyDown(KeyCode.D))
             {
-                _direction = Vector2.down;
+                _direction = Vector2.right;
                 direction.transform.position = new Vector3(1, 0, 0) + this.gameObject.transform.position;
                 direction.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
             }
