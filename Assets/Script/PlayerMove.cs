@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float _moveTime = 0.1f;
     public bool _isMoving = false;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         int horizontal = (int)Input.GetAxisRaw("Horizontal");
-        int vartical = (int)Input.GetAxisRaw("Vartical");
+        int vartical = (int)Input.GetAxisRaw("Vertical");
 
         if(horizontal != 0)
         {

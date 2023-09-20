@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager _instance;
     MapCreate _mapCreate;
     public static int _floor = 1;
-    public static int _level = 3;
+    public static int _level = 1;
     List<Enemy> _enemies;
     bool enemiesMoving;
 
