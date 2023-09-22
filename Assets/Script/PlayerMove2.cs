@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerMove2 : MonoBehaviour
@@ -10,7 +11,7 @@ public class PlayerMove2 : MonoBehaviour
     Rigidbody2D _rb;
     [SerializeField] float _moveSpeed = 2f;
     float x,y;
-    float _time;
+    public static float _time;
     Text _timeText;
     CinemachineVirtualCamera _vcam;
     [SerializeField] Text _textCountdown;
@@ -70,7 +71,7 @@ public class PlayerMove2 : MonoBehaviour
         if(collider.gameObject.CompareTag("Exit"))
         {
             //ÉQÅ[ÉÄÉNÉäÉAÇÃèàóù
-
+            SceneManager.LoadScene("GameClear");
         }
     }
 

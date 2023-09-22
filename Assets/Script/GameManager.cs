@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
+using static UnityEngine.Timeline.AnimationPlayableAsset;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     Text _levelText;
     GameObject _levelImage;
     bool doingSetup;
+    int _highScore;
 
     private void Awake()
     {
@@ -45,6 +48,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += SceneLoaded;
+        //Cursor.lockState = LockMode.Locked;
+        //Cursor.visible = false;
     }
     public void InitGame()
     {
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour
         doingSetup = true;
         _levelImage = GameObject.Find("LevelImage");
         _levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        _levelText.text = "Day" + _level;
+        _levelText.text =  _level + " floor dungeon";
         _levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
         //_enemies.Clear();
@@ -83,7 +88,17 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        _levelText.text = "After" + _level + "days, you starved.";
+        _levelText.text = _level + " floor dungeon breakthrough";
+        _highScore = PlayerPrefs.GetInt("EndresScore", 0);
+        if (_level > _highScore)
+        {
+            _highScore = _level;
+
+            //"SCORE"をキーとして、ハイスコアを保存
+            PlayerPrefs.SetInt("EndresScore", _highScore);
+            PlayerPrefs.Save();//ディスクへの書き込み
+            //_gameObject.SetActive(true);
+        }
         _levelImage.SetActive(true);
         enabled = false;
     }
