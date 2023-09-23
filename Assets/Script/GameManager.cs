@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     GameObject _levelImage;
     bool doingSetup;
     int _highScore;
+    GameObject _titleButton;
 
     private void Awake()
     {
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         _levelText = GameObject.Find("LevelText").GetComponent<Text>();
         _levelText.text =  _level + " floor dungeon";
         _levelImage.SetActive(true);
+        _titleButton = GameObject.Find("Title").GetComponent<GameObject>();
         Invoke("HideLevelImage", levelStartDelay);
         //_enemies.Clear();
         //É}ÉbÉvÇÃê∂ê¨
@@ -100,6 +102,7 @@ public class GameManager : MonoBehaviour
             //_gameObject.SetActive(true);
         }
         _levelImage.SetActive(true);
+        _titleButton.SetActive(true);
         enabled = false;
     }
 
