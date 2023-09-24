@@ -13,10 +13,11 @@ public class GameClear : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _gameObject.SetActive(false);
         _yourScore = PlayerMove2._time;
         _highScore = PlayerPrefs.GetFloat("MizeScore", 0f);
         _scoreText.text = "Your Score:" + _yourScore;
-        if (_yourScore > _highScore)
+        if (_yourScore < _highScore)
         {
             _highScore = _yourScore;
 
@@ -24,6 +25,8 @@ public class GameClear : MonoBehaviour
             PlayerPrefs.SetFloat("MizeScore", _highScore);
             PlayerPrefs.Save();//ディスクへの書き込み
             _gameObject.SetActive(true);
+            Debug.Log(_highScore);
+            Debug.Log("更新");
         }
     }
 

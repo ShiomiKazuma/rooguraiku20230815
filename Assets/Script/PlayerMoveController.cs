@@ -22,7 +22,7 @@ public class PlayerMoveController : MonoBehaviour
     public AudioClip _moveSound1;
     public AudioClip _moveSound2;
     //˜AË‘Îô
-    float _interval = 1f;
+    [SerializeField] float _interval = 1f;
     bool timer = true;
     float time = 0f;
     //Œü‚¢‚Ä‚¢‚é•ûŒü
@@ -194,6 +194,12 @@ public class PlayerMoveController : MonoBehaviour
         if(hit.collider.CompareTag("Enemy"))
         {
             Destroy(hit.collider.gameObject);
+        }
+        else if(hit.collider.CompareTag("Wall"))
+        {
+            Wall hitWall = hit.transform.GetComponent<Wall>();
+            //hitWall = hitWall as Wall;
+            hitWall.DamageWall(wallDamage);
         }
         
     }

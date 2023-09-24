@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     bool doingSetup;
     int _highScore;
     GameObject _titleButton;
-
+    GameObject _soundManager;
     private void Awake()
     {
         if (_instance == null)
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += SceneLoaded;
+        _soundManager = GameObject.Find("SoundManager");
         //Cursor.lockState = LockMode.Locked;
         //Cursor.visible = false;
     }
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
         _levelText = GameObject.Find("LevelText").GetComponent<Text>();
         _levelText.text =  _level + " floor dungeon";
         _levelImage.SetActive(true);
-        _titleButton = GameObject.Find("Title").GetComponent<GameObject>();
+        _titleButton = GameObject.Find("Title");
         Invoke("HideLevelImage", levelStartDelay);
         //_enemies.Clear();
         //マップの生成
@@ -90,20 +91,26 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        _levelText.text = _level + " floor dungeon breakthrough";
-        _highScore = PlayerPrefs.GetInt("EndresScore", 0);
-        if (_level > _highScore)
-        {
-            _highScore = _level;
+        SceneManager.sceneLoaded -= SceneLoaded;
+        Scene sampleScene1 = SceneManager.GetSceneByName("Endress");
+        SceneManager.MoveGameObjectToScene(this.gameObject, sampleScene1);
+        SceneManager.MoveGameObjectToScene(_soundManager, sampleScene1);
+        SceneManager.LoadScene("GameOver");
+        
+        //_levelText.text = _level + " floor dungeon breakthrough";
+        //_highScore = PlayerPrefs.GetInt("EndresScore", 0);
+        //if (_level > _highScore)
+        //{
+        //    _highScore = _level;
 
-            //"SCORE"をキーとして、ハイスコアを保存
-            PlayerPrefs.SetInt("EndresScore", _highScore);
-            PlayerPrefs.Save();//ディスクへの書き込み
-            //_gameObject.SetActive(true);
-        }
-        _levelImage.SetActive(true);
-        _titleButton.SetActive(true);
-        enabled = false;
+        //    //"SCORE"をキーとして、ハイスコアを保存
+        //    PlayerPrefs.SetInt("EndresScore", _highScore);
+        //    PlayerPrefs.Save();//ディスクへの書き込み
+        //    //_gameObject.SetActive(true);
+        //}
+        //_levelImage.SetActive(true);
+        //_titleButton.SetActive(true);
+        //enabled = false;
     }
 
     private void Update()

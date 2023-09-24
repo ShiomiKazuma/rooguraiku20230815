@@ -12,17 +12,15 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager._level = 1;
         //スコアのロード
         _endresHighscore = PlayerPrefs.GetInt("EndresScore", 0);
         _mizeHighscore = PlayerPrefs.GetFloat("MizeScore", 0f);
 
         _endresScore.text = "EndressScore:" + _endresHighscore.ToString();
-        _mizeScore.text = "MizeScore" + _mizeHighscore.ToString();
+        _mizeScore.text = "MizeScore:" + _mizeHighscore.ToString();
+        Debug.Log(GameManager._level);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }
