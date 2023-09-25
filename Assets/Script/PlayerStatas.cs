@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using DG;
+using DG.Tweening;
+using Slider = UnityEngine.UI.Slider;
 
 public class PlayerStatas : MonoBehaviour
 {
@@ -11,8 +15,8 @@ public class PlayerStatas : MonoBehaviour
     [SerializeField] public int _maxHp = 100;
     st statas = st.Normal;
     public int _wallDamage = 1;
-    public int _pointsPerFood = 10;
-    public int _pointsPerSoda = 20;
+    public int _pointsPerFood = 15;
+    public int _pointsPerSoda = 25;
     public float _restartLevelDelay = 1f;
 
     //‰¹‚É‚Â‚¢‚Ä
@@ -25,6 +29,8 @@ public class PlayerStatas : MonoBehaviour
     Animator _animator;
     int _food;
     public Text _foodText;
+   //[SerializeField] Slider _hpBar;
+   [SerializeField] Slider _powerBar;
     public enum st
     {
         Normal,
@@ -40,6 +46,8 @@ public class PlayerStatas : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _food = GameManager._instance._foodPoint;
+        _powerBar.maxValue = GameManager._instance._maxFoodPoint;
+        _powerBar.value = _food;
         _foodText.text = "Food: " + _food;
        // base.Start();
     }
@@ -85,6 +93,7 @@ public class PlayerStatas : MonoBehaviour
     public void LoseFood(int loss)
     {
         _animator.SetTrigger("PlayerHit");
+        _powerBar.DOValue(_food - loss, 1f);
         _food -= loss;
         _foodText.text = "Food: " + _food;
         CheckGameOver() ;
@@ -100,6 +109,11 @@ public class PlayerStatas : MonoBehaviour
         else if(collision.gameObject.tag == "Food")
         {
             _food += _pointsPerFood;
+            if(_food >= GameManager._instance._maxFoodPoint)
+            {
+                _food = GameManager._instance._maxFoodPoint;
+            }
+            _powerBar.DOValue(_food, 1f);
             _foodText.text = "Food: " + _food;
             SoundManager.instance.RandomizeSfx(_eatSound1, _eatSound2);
             collision.gameObject.SetActive(false);
@@ -107,6 +121,11 @@ public class PlayerStatas : MonoBehaviour
         else if(collision.gameObject.tag == "Soda")
         {
             _food += _pointsPerSoda;
+            if (_food >= GameManager._instance._maxFoodPoint)
+            {
+                _food = GameManager._instance._maxFoodPoint;
+            }
+            _powerBar.DOValue(_food, 1f);
             _foodText.text = "Food: " + _food;
             SoundManager.instance.RandomizeSfx( _drinkSound1, _drinkSound2);
             collision.gameObject.SetActive(false);
@@ -115,6 +134,7 @@ public class PlayerStatas : MonoBehaviour
 
     public void FoodDes()
     {
+        _powerBar.DOValue(_food - 1, 1f);
         _food--;
         _foodText.text = "Food: " + _food;
     }

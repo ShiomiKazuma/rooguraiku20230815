@@ -33,6 +33,7 @@ public class PlayerMoveController : MonoBehaviour
     [SerializeField] GameObject direction;
 
     public int wallDamage = 1;
+    public int enemyDamage = 5;
     void Start()
     {
         m_gridMove = GetComponent<GridMoveController>();
@@ -193,7 +194,9 @@ public class PlayerMoveController : MonoBehaviour
 
         if(hit.collider.CompareTag("Enemy"))
         {
-            Destroy(hit.collider.gameObject);
+            EnemyController hitEnemy = hit.transform.GetComponent<EnemyController>();
+            hitEnemy.DamageEnemy(enemyDamage);
+            //Destroy(hit.collider.gameObject);
         }
         else if(hit.collider.CompareTag("Wall"))
         {

@@ -9,9 +9,11 @@ public class TitleManager : MonoBehaviour
     [SerializeField] Text _mizeScore;
     int _endresHighscore = 0;
     float _mizeHighscore = 0;
+    [SerializeField] GameObject _delete;
     // Start is called before the first frame update
     void Start()
     {
+        _delete.SetActive(false);
         GameManager._level = 1;
         //スコアのロード
         _endresHighscore = PlayerPrefs.GetInt("EndresScore", 0);
@@ -22,5 +24,12 @@ public class TitleManager : MonoBehaviour
         Debug.Log(GameManager._level);
     }
 
-   
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            _delete.SetActive(true);
+        }
+    }
+
 }

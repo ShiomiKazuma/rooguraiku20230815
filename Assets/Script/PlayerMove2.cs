@@ -16,6 +16,9 @@ public class PlayerMove2 : MonoBehaviour
     CinemachineVirtualCamera _vcam;
     [SerializeField] Text _textCountdown;
     bool _isCountdown;
+    [SerializeField] AudioClip _audioClip;
+    [SerializeField] AudioSource _audioSource;
+    bool audioJuge = false;
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -29,12 +32,21 @@ public class PlayerMove2 : MonoBehaviour
             _vcam.Follow = transform;
         }
         StartCoroutine(Countdown());
+
+        _audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         if( _isCountdown )
         {
+            if(!audioJuge)
+            {
+                _audioSource.loop = true;
+                _audioSource.clip = _audioClip;
+                _audioSource.Play();
+                audioJuge = true;
+            }
             _time += Time.deltaTime;
             x = Input.GetAxis("Horizontal");
             y = Input.GetAxis("Vertical");

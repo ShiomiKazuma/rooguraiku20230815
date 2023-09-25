@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     List<Enemy> _enemies;
     bool enemiesMoving;
 
-    [SerializeField] int _maxFoodPoint = 100;
+    [SerializeField] public int _maxFoodPoint = 100;
     public int _foodPoint = 100;
     [HideInInspector] public bool _playersTurn = true;
 
